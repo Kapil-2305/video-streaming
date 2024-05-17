@@ -33,9 +33,13 @@ app.use((req, res, next) => {
     next()
 });
 
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
-app.use("/uploads", express.static("uploads"))
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use("/uploads", express.static("uploads"));
+
+app.get('/', function(req, res){
+    res.json({message: "Hello chai aur code"})
+})
 
 app.listen(8000, function(){
     console.log("App is listening at port 8000...")
