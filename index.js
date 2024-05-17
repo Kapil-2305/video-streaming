@@ -4,6 +4,7 @@ import multer from "multer"
 
 const app = express();
 
+//multer middleware
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
       cb(null, "./uploads")
@@ -11,7 +12,10 @@ const storage = multer.diskStorage({
     filename: function(req, file, cb){
       cb(null, file.fieldname + "-" + uuidv4() + path.extname(file.originalname))
     }
-  })
+})
+
+// multer configuration
+const upload = multer({storage: storage})
 
 app.use(
     cors({
