@@ -3,6 +3,8 @@ import cors from "cors"
 import multer from "multer"
 import { v4 as uuidv4 } from "uuid"
 import path from "path"
+import fs from "fs"
+import { exec } from "child_process" // watch out
 
 const app = express();
 
@@ -42,6 +44,19 @@ app.use("/uploads", express.static("uploads"));
 app.get('/', function(req, res){
     res.json({message: "Hello guys"})
 })
+
+app.post("/upload", upload.single("file"), function(req, res){
+    const lessonId = uuidv4();
+    const vidioPath = req.file.path;
+    const outputPath = `uploads/courses/${lessonId}`;
+    const hlsPath = `${outputPath}/index.m3u8`;
+    const thumbPath = `${outputPath}/thumb.jpg`;
+    console.log("hlsPath: ", hlsPath);
+    console.log("thumbPath: ", thumbPath);
+
+    console.log("file uploaded successfully");
+    res.json({message: "file uploaded successfully"});
+});
 
 app.listen(8000, function(){
     console.log("App is listening at port 8000...")
