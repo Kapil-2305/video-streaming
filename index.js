@@ -1,6 +1,8 @@
 import express from "express"
 import cors from "cors"
 import multer from "multer"
+import { v4 as uuidv4 } from "uuid"
+import path from "path"
 
 const app = express();
 
@@ -19,8 +21,8 @@ const upload = multer({storage: storage})
 
 app.use(
     cors({
-      origin: ["http://localhost:3000", "http://localhost:5173"],
-      credentials: true
+        origin: ["http://localhost:3000", "http://localhost:5173"],
+        credentials: true
     })
 );
 
@@ -38,7 +40,7 @@ app.use(express.urlencoded({extended: true}));
 app.use("/uploads", express.static("uploads"));
 
 app.get('/', function(req, res){
-    res.json({message: "Hello chai aur code"})
+    res.json({message: "Hello guys"})
 })
 
 app.listen(8000, function(){
